@@ -290,6 +290,7 @@ body {
     margin: 4px -2px;
     height: 45px;
     width: 265px;
+    padding: 0 10px;
     border: 1px solid #000;
     box-sizing: border-box;
 }
@@ -346,11 +347,10 @@ body {
     bottom: 5px;
     display: block;
     height: 1px;
-    width: 1000px;
+    width: 100%;
     background-color: #a0bb00;
 }
-.table-row_age:after,
-.table-row_position:after {
+.table-row_age:after {
     bottom: 1px;
 }
 .table-row_photo:after {
@@ -359,7 +359,6 @@ body {
 .cabinet__form {
     max-width: 960px;
     margin: 0 auto;
-    overflow: hidden;
 }
 input:invalid {
     border-color: red;
@@ -368,6 +367,95 @@ input:invalid {
     display: block;
     color: red;
 }
+.v-select {
+    position: relative;
+    margin: 4px -2px;
+    min-height: 45px;
+    width: 265px;
+    border-radius: 0;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+.dropdown-toggle {
+    min-height: 45px;
+    height: 100%;
+}
+.v-select.unsearchable .dropdown-toggle {
+    background: #fff;
+    border: none;
+    padding-top: 6px;
+}
+.v-select:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    background-color: #a0bb00;
+}
+.v-select:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid #000;
+}
+.cabinet_display-block {
+    vertical-align: top;
+}
+.cabinet_display-block .v-select .open-indicator {
+    top: 0;
+    bottom: 0;
+    height: 100px;
+    right: 0;
+    width: 30px;
+}
+.cabinet_display-block .v-select .open-indicator:before {
+    display: none;
+}
+.cabinet_display-block .v-select .selected-tag {
+    position: relative;
+    margin: 0;
+    display: block;
+    clear: both;
+    width: 230px;
+    padding: 5px 10px;
+    overflow: hidden;
+    border: none;
+    background-color: #fff;
+}
+.cabinet_display-block .v-select .selected-tag .close {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+.cabinet_display-block .v-select .selected-tag .close>* {
+    display: none;
+}
+.cabinet_display-block {
+    position: relative;
+}
+.placeholder {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    padding-right: 20px;
+    font-size: 16px;
+}
+.cabinet_display-block .v-select .dropdown-menu {
+    top: 0;
+    transform: translateY(-100%);
+}
+
 @media only screen and (max-width : 910px) {
     .table-row_photo:after {
         bottom: 85px;

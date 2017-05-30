@@ -9,7 +9,7 @@
     <script src="jquery-3.2.1.min.js"></script>
 </head>
 <body>
-    <div class="popup show">
+    <div id="app" class="popup show">
         <h2 class="popup__header">
             <span class="popup__text">Поздравляем Вас с успешной регистрацией на нашем портале Prommu.com</span>
             <span class="close">
@@ -122,18 +122,16 @@
                             </td>
                             <td class="table-row__description table-row_phone cabinet_display-block">Номер телефона позволит Вам использовать дополнительный функционал сервиса бесплатно.</td>
                         </tr>
-                        <tr>
+                        <tr id="vue">
                             <td class="table-row__header cabinet_display-block">Желаемая должность</td>
                             <td class="cabinet_display-block">
-                                <select name="position"
-                                        id="position"
-                                        multiple
-                                        data-rule-required="true"
-                                        data-msg-required="это поле обязательно">
-                                    <option selected value="position">Выберите должность</option>
-                                    <option>Инженер-технолог</option>
-                                    <option>Бухгалтер</option>
-                                    <option>Переводчик</option>
+                                <v-select multiple :options="positions" class="v-position select"
+                                          :placeholder="'Выберите должность'"
+                                          :searchable="false"
+                                          v-model="selectedPosition"></v-select>
+                                <span class="placeholder" v-show="!selectedPosition.length">Выберите желаемую должность</span>
+                                <select name="positions" multiple style="display: none;">
+                                    <option v-for="position in selectedPosition" :value="position.value" selected>{{position.label}}</option>
                                 </select>
                             </td>
                             <td class="table-row__description table-row_position cabinet_display-block">Укажите одну или несколько должностей, на которых Вы бы хотели работать.</td>
@@ -148,27 +146,66 @@
     <script src="./jquery-ui/jquery-ui.min.js"></script>
     <script src="./jquery-validator/jquery.form-validator.min.js"></script>
     <script src="./igorescobar-jQuery-Mask-Plugin-535b4e4/jquery.mask.min.js"></script>
+
+    <script src="./vue/vue.min.js"></script>
+    <script src="https://unpkg.com/vue-select@latest"></script>
     <script>
+
+
 //        POPUP
         $(".close").click(function () {
             $(".popup").fadeOut(600);
         });
 //        SELECT
-        $("#birthday").selectmenu(
-//            position: {
-//                my : "left bottom",
-//                at: "left top"
-//            }
+        $("#birthday").selectmenu({
+            position: {
+                my : "left bottom",
+                at: "left top"
+                }
+            }
         );
-        $("#birthmonth").selectmenu();
-        $("#birthyear").selectmenu();
-        $("#position").selectmenu();
+        $("#birthmonth").selectmenu({
+            position: {
+                my : "left bottom",
+                at: "left top"
+            }
+        });
+        $("#birthyear").selectmenu({
+            position: {
+                my : "left bottom",
+                at: "left top"
+            }
+        });
+        $("#position").selectmenu({
+            position: {
+                my : "left bottom",
+                at: "left top"
+            }
+        });
 //            FORM
         $(function(){
             $("form").validate();
         });
         $(function(){
             $("#contact-phone").mask("+7(999) 999-99-99");
+        });
+    </script>
+
+    <script>
+        Vue.component('v-select', VueSelect.VueSelect);
+
+        var app = new Vue({
+            el: '#vue',
+            data: {
+               selectedPosition: [],
+               positions: [
+                   {label: 'Бухгалтер', value: 'Бухгалтер'},
+                   {label: 'Инженер-технолог', value: 'Инженер-технолог'},
+                   {label: 'Инженер-строитель', value: 'Инженер-строитель'},
+                   {label: 'Мерчендайзер', value: 'Мерчендайзер'},
+                   {label: 'Геолог', value: 'Геолог'}
+               ]
+            }
         });
     </script>
 </body>
